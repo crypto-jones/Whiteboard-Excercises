@@ -1,3 +1,4 @@
+// Runtime O(n^2)
 function productOfAllOtherNums(arr) {
   let output = [];
 

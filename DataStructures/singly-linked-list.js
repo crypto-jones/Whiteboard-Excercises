@@ -92,6 +92,17 @@ class SinglyLinkedList {
 
     return current.val;
   }
+
+  set(i, val) {
+    let target = this.get(i);
+
+    if (!target) return false;
+
+    if (target) {
+      target = val;
+      return true;
+    }
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -101,4 +112,6 @@ list.push('c');
 list.unshift('d');
 
 console.log(list);
+console.log(list.get(0));
+console.log(list.set(0, 'f'));
 console.log(list.get(0));

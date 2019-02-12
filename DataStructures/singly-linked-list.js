@@ -103,6 +103,56 @@ class SinglyLinkedList {
       return true;
     }
   }
+
+  insert(i, val) {
+    if (i < 0 || i > this.length) {
+      return false;
+    }
+
+    if (i === this.length) {
+      return !!this.push(val);
+    }
+
+    if (i === 0) {
+      return !!this.unshift(val);
+    }
+
+    const node = new Node(val);
+    const prev = this.get(i - 1);
+    let temp = prev.next;
+    prev.next = node;
+    node.next = temp;
+    this.length++;
+    return true;
+  }
+
+  remove(i) {
+    if (i < 0 || i > this.length) return undefined;
+    if (i === this.length - 1) return this.pop();
+    if (i === 0) return this.shift();
+
+    const prev = this.get(i - 1);
+    let removed = prev.next;
+    prev.next = removed.next;
+    this.length--;
+    return removed;
+  }
+
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+
+    for (let i = 0; i < this.length; i++) {
+      next = node.next; // a -> b -> c -> null
+      node.next = prev; // c -> b -> a -> null
+      prev = node; // null -> a -> b -> c
+      node = next; // a -> b -> c -> null
+    }
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -110,8 +160,10 @@ list.push('a');
 list.push('b');
 list.push('c');
 list.unshift('d');
+list.remove(0);
+list.reverse();
 
+// console.log(list.get(0));
+// console.log(list.set(0, 'f'));
+// console.log(list.get(0));
 console.log(list);
-console.log(list.get(0));
-console.log(list.set(0, 'f'));
-console.log(list.get(0));
